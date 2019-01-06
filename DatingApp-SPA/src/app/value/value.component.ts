@@ -16,7 +16,7 @@ values: any;
     this.getValues();
   }
 
-  // we want to call this method (getValues) when our components loads, the constructor is considered too early to get data from API,
+  // we want to call this method (getValues) when our components loads. The constructor is considered too early to get data from API,
   // so we use (ngOnInit)
   getValues()  {
     this.http.get('http://localhost:5000/api/values').subscribe(response => {

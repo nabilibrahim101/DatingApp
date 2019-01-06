@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,11 @@ namespace DatingApp.API.Controllers
 {
     //GET http://localhost:5000/api/values/5
     // By default the kestrel web server listen to port 5000
+    [Authorize]
     [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    [ApiController] //This has 2 main features: 1- enforces attribute routing up here, 2-it validate our requests. also we don't need model state check.
+    public class ValuesController : ControllerBase //ControllerBase is support without view,
+    //our view support will come from angular application. we are not going to provide any views via MVC
     {
         // to get data from database, we need to inject dataContext into this class (or into our controller)
         private readonly DataContext _context;
@@ -34,6 +37,7 @@ namespace DatingApp.API.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {

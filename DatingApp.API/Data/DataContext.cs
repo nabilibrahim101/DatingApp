@@ -13,6 +13,7 @@ namespace DatingApp.API.Data
         
         // this will be the table name, now we need to tell our application about this, and we use our Startup class to do so.
         public DbSet<Value> Values { get; set; } 
+        public DbSet<User> Users { get; set; }
 
     }
 }
